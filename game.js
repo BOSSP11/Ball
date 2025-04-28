@@ -19,6 +19,9 @@ function resizeCanvas() {
   canvas.width = canvas.width * scaleFactor;
   canvas.height = canvas.height * scaleFactor;
   ctx.scale(scaleFactor, scaleFactor);  // Scale the canvas context accordingly
+
+  // Adjust ball size based on screen size
+  ball.radius = Math.min(canvas.width, canvas.height) * 0.1; // Make ball size proportional
 }
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);  // Ensure resizing when screen size changes
@@ -27,7 +30,7 @@ window.addEventListener("resize", resizeCanvas);  // Ensure resizing when screen
 let ball = {
   x: canvas.width / 2,
   y: canvas.height / 2,
-  radius: 40,
+  radius: Math.min(canvas.width, canvas.height) * 0.1,  // Adjust size based on screen size
   color: localStorage.getItem("ballColor") || "#ff4757",
   velocityX: 3, // Initial horizontal velocity
   velocityY: 5  // Initial vertical velocity
@@ -129,12 +132,14 @@ function resetGame() {
   score = 0;
   isGameOver = false;
   
-  // Randomize ball position within the canvas (except for the edges)
-  ball.x = Math.random() * (canvas.width - 2 * ball.radius) + ball.radius;
-  ball.y = Math.random() * (canvas.height - 2 * ball.radius) + ball.radius;
+  // Set the ball to the center of the canvas
+  ball.x = canvas.width / 2;
+  ball.y = canvas.height / 2;
   
-  ball.velocityX = 3;  // Reset horizontal velocity
-  ball.velocityY = 5;  // Reset vertical velocity
+  // Set a vertical downward velocity for the ball to fall straight down
+  ball.velocityX = 0;  // Keep the horizontal velocity at 0 for vertical fall
+  ball.velocityY = 5;  // Set vertical velocity for falling effect
+  
   ball.color = localStorage.getItem("ballColor") || "#ff4757";
   
   scoreBoard.innerHTML = `Score: ${score} Recent: <span id="recentScore">${lowestScore}</span> | Highest: <span id="highestScore">${highestScore}</span>`;
