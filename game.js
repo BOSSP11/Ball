@@ -67,13 +67,15 @@ function gameOver() {
   finalScore.textContent = score;
   gameOverScreen.classList.remove("hidden");
 
+  // Update highest score if needed
   if (score > highestScore) {
     highestScore = score;
     localStorage.setItem("highestScore", highestScore);
     highestScoreEl.textContent = highestScore;
   }
 
-  if (lowestScore == 0 || score < lowestScore) {
+  // Update lowest score if needed
+  if (lowestScore === 0 || score < lowestScore) {
     lowestScore = score;
     localStorage.setItem("recentScore", lowestScore);
     lowestScoreEl.textContent = lowestScore;
