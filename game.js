@@ -100,8 +100,8 @@ canvas.addEventListener("click", (e) => {
   );
 
   if (distance <= ball.radius) {
-    ball.velocityX = -8;
-    ball.velocityY = -8;
+    ball.velocityX = -12;
+    ball.velocityY = -12;
     score++;
     updateScoreBoard();
   }
@@ -122,8 +122,8 @@ canvas.addEventListener("touchstart", (e) => {
   );
 
   if (distance <= ball.radius) {
-    ball.velocityX = -8;
-    ball.velocityY = -8;
+    ball.velocityX = -12;
+    ball.velocityY = -12;
     score++;
     updateScoreBoard();
   }
