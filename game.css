@@ -26,6 +26,7 @@ body {
   max-width: 400px;
   height: 70vh;
   max-height: 600px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 #scoreBoard {
@@ -110,5 +111,12 @@ button:focus {
 
   #gameOverScreen p {
     font-size: clamp(16px, 3.5vw, 20px);
+  }
+}
+
+/* Fix canvas aspect ratio for mobile devices */
+@media (max-width: 600px) {
+  #gameCanvas {
+    height: 50vh; /* Ensure canvas height is more flexible on smaller screens */
   }
 }
