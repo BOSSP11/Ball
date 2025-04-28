@@ -9,8 +9,13 @@ const lowestScoreEl = document.getElementById("recentScore");
 const highestScoreEl = document.getElementById("highestScore");
 
 // Canvas setup
-canvas.width = 400;
-canvas.height = 600;
+function resizeCanvas() {
+  // Make the canvas responsive
+  canvas.width = window.innerWidth * 0.9;  // 90% of screen width
+  canvas.height = window.innerHeight * 0.7;  // 70% of screen height
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);  // Ensure resizing when screen size changes
 
 // Ball properties
 let ball = {
@@ -65,7 +70,6 @@ function update() {
   }
 }
 
-
 // Game over handler
 function gameOver() {
   isGameOver = true;
@@ -86,16 +90,16 @@ function gameOver() {
   }
 }
 
-// Click event for bouncing the ball
-canvas.addEventListener("click", (e) => {
+// Touch event for bouncing the ball (for mobile)
+canvas.addEventListener("touchstart", (e) => {
   if (isGameOver) return;
 
   const rect = canvas.getBoundingClientRect();
-  const clickX = e.clientX - rect.left;
-  const clickY = e.clientY - rect.top;
+  const touchX = e.touches[0].clientX - rect.left;
+  const touchY = e.touches[0].clientY - rect.top;
 
   const distance = Math.sqrt(
-    (clickX - ball.x) ** 2 + (clickY - ball.y) ** 2
+    (touchX - ball.x) ** 2 + (touchY - ball.y) ** 2
   );
 
   if (distance <= ball.radius) {
@@ -106,7 +110,6 @@ canvas.addEventListener("click", (e) => {
     scoreBoard.innerHTML = `Score: ${score} Recent: <span id="recentScore">${lowestScore}</span> | Highest: <span id="highestScore">${highestScore}</span>`;
   }
 });
-
 
 // Restart button event
 restartButton.addEventListener("click", () => {
@@ -129,7 +132,6 @@ function resetGame() {
   scoreBoard.innerHTML = `Score: ${score} Recent: <span id="recentScore">${lowestScore}</span> | Highest: <span id="highestScore">${highestScore}</span>`;
   gameOverScreen.classList.add("hidden");
 }
-
 
 // Game loop
 function gameLoop() {
