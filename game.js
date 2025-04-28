@@ -122,7 +122,7 @@ canvas.addEventListener("touchstart", (e) => {
   );
 
   if (distance <= ball.radius) {
-    ball.velocityX = Math.random() * 6 - 3;
+    ball.velocityX = -8;
     ball.velocityY = -8;
     score++;
     updateScoreBoard();
@@ -141,8 +141,8 @@ function resetGame() {
 
   ball.x = Math.random() * (canvas.width - 2 * ball.radius) + ball.radius;
   ball.y = 100;
-  ball.velocityX = 3;
-  ball.velocityY = 5;
+  ball.velocityX = 7;
+  ball.velocityY = 9;
   ball.color = localStorage.getItem("ballColor") || "#ff4757";
 
   updateScoreBoard();
