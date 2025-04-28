@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keepy Uppy - Play</title>
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+  <!-- Game Canvas -->
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- Scoreboard -->
+  <div id="scoreBoard">
+    Score: 0
+    Recent: <span id="recentScore">0</span> |
+    Highest: <span id="highestScore">0</span>
+  </div>
+
+  <!-- Game Over Screen -->
+  <div id="gameOverScreen" class="hidden">
+    <h1>Game Over</h1>
+    <p>Your score: <span id="finalScore">0</span></p>
+    <button id="restartButton">Play Again</button>
+    <br><br>
+    <button onclick="window.location.href='index.html'">Main Menu</button>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
