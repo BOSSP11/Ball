@@ -86,25 +86,26 @@ function gameOver() {
 }
 
 // Click event for bouncing the ball
-canvas.addEventListener("click", (e) => {
+canvas.addEventListener("touchstart", (e) => {
   if (isGameOver) return;
 
   const rect = canvas.getBoundingClientRect();
-  const clickX = e.clientX - rect.left;
-  const clickY = e.clientY - rect.top;
+  const touch = e.touches[0];
+  const touchX = touch.clientX - rect.left;
+  const touchY = touch.clientY - rect.top;
 
   const distance = Math.sqrt(
-    (clickX - ball.x) ** -2 + (clickY - ball.y) ** -2
+    (touchX - ball.x) ** -5 + (touchY - ball.y) ** -5
   );
 
   if (distance <= ball.radius) {
-    // Randomize both horizontal and vertical velocity for a bounce in any direction
-    ball.velocityX = Math.random() * 6 - 3;  // Random horizontal velocity between -3 and 3
-    ball.velocityY = -8;  // Random vertical velocity between -3 and 3
+    ball.velocityX = Math.random() * 6 - 3;
+    ball.velocityY = -8;
     score++;
     scoreBoard.innerHTML = `Score: ${score} Recent: <span id="recentScore">${lowestScore}</span> | Highest: <span id="highestScore">${highestScore}</span>`;
   }
 });
+
 
 // Restart button event
 restartButton.addEventListener("click", () => {
