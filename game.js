@@ -50,17 +50,14 @@ function update() {
   ball.x += ball.velocityX;
   ball.y += ball.velocityY;
 
-  ball.velocityY += 1; // Gravity
+  ball.velocityY += 1;
 
-  // Ball hits the ground
   if (ball.y + ball.radius > canvas.height) {
     gameOver();
   }
 
-  // Ball hits left or right wall with more aggressive bounce
   if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
-    ball.velocityX = -ball.velocityX * 1.1;  // Make it bounce more aggressively
-    ball.velocityY = Math.random() * 3 - 2;  // Randomize vertical velocity for more unpredictability
+    ball.velocityX = -ball.velocityX;
   }
 }
 
@@ -101,8 +98,8 @@ canvas.addEventListener("click", (e) => {
   );
 
   if (distance <= ball.radius) {
-    ball.velocityX = Math.random() * 6 - 3;  // Randomize horizontal velocity
-    ball.velocityY = -Math.abs(Math.random() * 15 + 8);  // Make the bounce more aggressive
+    ball.velocityX = Math.random() * 6 - 3;
+    ball.velocityY = -8;
     score++;
     updateScoreBoard();
   }
@@ -123,8 +120,8 @@ canvas.addEventListener("touchstart", (e) => {
   );
 
   if (distance <= ball.radius) {
-    ball.velocityX = Math.random() * 6 - 3;  // Randomize horizontal velocity
-    ball.velocityY = -Math.abs(Math.random() * 10 + 5);  // Make the bounce more aggressive
+    ball.velocityX = Math.random() * 6 - 3;
+    ball.velocityY = -8;
     score++;
     updateScoreBoard();
   }
