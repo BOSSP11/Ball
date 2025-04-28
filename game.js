@@ -50,7 +50,7 @@ function update() {
   ball.x += ball.velocityX;
   ball.y += ball.velocityY;
 
-  ball.velocityY += 0.25;
+  ball.velocityY += 0.35;
 
   if (ball.y + ball.radius > canvas.height) {
     gameOver();
