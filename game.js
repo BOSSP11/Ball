@@ -50,7 +50,7 @@ function update() {
   ball.x += ball.velocityX;
   ball.y += ball.velocityY;
 
-  ball.velocityY += 0.45;
+  ball.velocityY += 0.40;
 
   if (ball.y + ball.radius > canvas.height) {
     gameOver();
@@ -100,8 +100,8 @@ canvas.addEventListener("click", (e) => {
   );
 
   if (distance <= ball.radius) {
-    ball.velocityX = -12;
-    ball.velocityY = -12;
+    ball.velocityX = -10;
+    ball.velocityY = -10;
     score++;
     updateScoreBoard();
   }
@@ -122,8 +122,8 @@ canvas.addEventListener("touchstart", (e) => {
   );
 
   if (distance <= ball.radius) {
-    ball.velocityX = -12;
-    ball.velocityY = -12;
+    ball.velocityX = -10;
+    ball.velocityY = -10;
     score++;
     updateScoreBoard();
   }
