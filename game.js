@@ -100,7 +100,7 @@ canvas.addEventListener("click", (e) => {
   );
 
   if (distance <= ball.radius) {
-    ball.velocityX = Math.random() * 6 - 3;
+    ball.velocityX = -8;
     ball.velocityY = -8;
     score++;
     updateScoreBoard();
