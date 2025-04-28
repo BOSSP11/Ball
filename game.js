@@ -18,8 +18,8 @@ let ball = {
   y: 100,
   radius: 60,
   color: localStorage.getItem("ballColor") || "#ff4757",
-  velocityX: 5,
-  velocityY: 7
+  velocityX: 3,
+  velocityY: 5
 };
 
 let score = 0;
@@ -50,7 +50,7 @@ function update() {
   ball.x += ball.velocityX;
   ball.y += ball.velocityY;
 
-  ball.velocityY += 1;
+  ball.velocityY += 0.25;
 
   if (ball.y + ball.radius > canvas.height) {
     gameOver();
@@ -82,7 +82,7 @@ function gameOver() {
 
 // Unified score update function
 function updateScoreBoard() {
-  scoreBoard.innerHTML = Score: ${score} Recent: <span id="recentScore">${lowestScore}</span> | Highest: <span id="highestScore">${highestScore}</span>;
+  scoreBoard.innerHTML = `Score: ${score} Recent: <span id="recentScore">${lowestScore}</span> | Highest: <span id="highestScore">${highestScore}</span>`;
 }
 
 // Click event
