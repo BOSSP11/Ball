@@ -13,6 +13,12 @@ function resizeCanvas() {
   // Make the canvas responsive
   canvas.width = window.innerWidth * 0.9;  // 90% of screen width
   canvas.height = window.innerHeight * 0.7;  // 70% of screen height
+
+  // Update the scale factor to account for device pixel ratio
+  const scaleFactor = window.devicePixelRatio || 1;
+  canvas.width = canvas.width * scaleFactor;
+  canvas.height = canvas.height * scaleFactor;
+  ctx.scale(scaleFactor, scaleFactor);  // Scale the canvas context accordingly
 }
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);  // Ensure resizing when screen size changes
@@ -94,9 +100,11 @@ function gameOver() {
 canvas.addEventListener("touchstart", (e) => {
   if (isGameOver) return;
 
+  // Get touch position relative to canvas
   const rect = canvas.getBoundingClientRect();
-  const touchX = e.touches[0].clientX - rect.left;
-  const touchY = e.touches[0].clientY - rect.top;
+  const scaleFactor = window.devicePixelRatio || 1;  // Consider scaling factor for pixel density
+  const touchX = (e.touches[0].clientX - rect.left) * scaleFactor;
+  const touchY = (e.touches[0].clientY - rect.top) * scaleFactor;
 
   const distance = Math.sqrt(
     (touchX - ball.x) ** 2 + (touchY - ball.y) ** 2
