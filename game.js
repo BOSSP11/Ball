@@ -18,8 +18,8 @@ let ball = {
   y: 100,
   radius: 60,
   color: localStorage.getItem("ballColor") || "#ff4757",
-  velocityX: 4,
-  velocityY: 6
+  velocityX: 5,
+  velocityY: 7
 };
 
 let score = 0;
@@ -50,7 +50,7 @@ function update() {
   ball.x += ball.velocityX;
   ball.y += ball.velocityY;
 
-  ball.velocityY += 0.35;
+  ball.velocityY += 1;
 
   if (ball.y + ball.radius > canvas.height) {
     gameOver();
