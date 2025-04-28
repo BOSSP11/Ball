@@ -18,10 +18,8 @@ let ball = {
   y: 100,
   radius: 60,
   color: localStorage.getItem("ballColor") || "#ff4757",
-  velocityX: 3, // Adjusted to a more consistent velocity
-  velocityY: 5, // Adjusted to a more consistent velocity
-  gravity: 0.5,  // Reduced gravity to slow down the fall
-  bounceFactor: 0.8  // Added bounce factor for a more natural feel
+  velocityX: 5,
+  velocityY: 7
 };
 
 let score = 0;
@@ -52,14 +50,10 @@ function update() {
   ball.x += ball.velocityX;
   ball.y += ball.velocityY;
 
-  // Apply gravity
-  ball.velocityY += ball.gravity;
+  ball.velocityY += 1;
 
   if (ball.y + ball.radius > canvas.height) {
-    ball.y = canvas.height - ball.radius; // Prevent ball from going below the canvas
-    ball.velocityY = -ball.velocityY * ball.bounceFactor; // Bounce back with reduced velocity
-    score++;
-    updateScoreBoard();
+    gameOver();
   }
 
   if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
