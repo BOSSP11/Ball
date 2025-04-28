@@ -96,7 +96,7 @@ canvas.addEventListener("click", (e) => {
   const clickY = e.clientY - rect.top;
 
   const distance = Math.sqrt(
-    (clickX - ball.x) ** 1 + (clickY - ball.y) ** 1
+    (clickX - ball.x) ** 2 + (clickY - ball.y) ** 2
   );
 
   if (distance <= ball.radius) {
@@ -118,7 +118,7 @@ canvas.addEventListener("touchstart", (e) => {
   const touchY = touch.clientY - rect.top;
 
   const distance = Math.sqrt(
-    (touchX - ball.x) ** 1 + (touchY - ball.y) ** 1
+    (touchX - ball.x) ** 2 + (touchY - ball.y) ** 2
   );
 
   if (distance <= ball.radius) {
