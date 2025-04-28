@@ -102,7 +102,7 @@ canvas.addEventListener("click", (e) => {
 
   if (distance <= ball.radius) {
     ball.velocityX = Math.random() * 6 - 3;  // Randomize horizontal velocity
-    ball.velocityY = -Math.abs(Math.random() * 10 + 5);  // Make the bounce more aggressive
+    ball.velocityY = -Math.abs(Math.random() * 15 + 8);  // Make the bounce more aggressive
     score++;
     updateScoreBoard();
   }
