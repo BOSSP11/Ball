@@ -15,11 +15,11 @@ canvas.height = 600;
 // Ball properties
 let ball = {
   x: canvas.width / 2,
-  y: 100,  // Ball starts at the top
-  radius: 60,  // Increased radius for better mobile hitbox
+  y: 100,
+  radius: 60,
   color: localStorage.getItem("ballColor") || "#ff4757",
-  velocityX: 3, // Initial horizontal velocity
-  velocityY: 5  // Initial vertical velocity
+  velocityX: 3,
+  velocityY: 5
 };
 
 let score = 0;
@@ -47,19 +47,15 @@ function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
 
-  // Update ball position based on velocities
   ball.x += ball.velocityX;
   ball.y += ball.velocityY;
 
-  // Apply gravity to vertical velocity
   ball.velocityY += 0.25;
 
-  // Bounce off the bottom wall (keep this)
   if (ball.y + ball.radius > canvas.height) {
     gameOver();
   }
 
-  // Bounce off left and right walls
   if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
     ball.velocityX = -ball.velocityX;
   }
@@ -71,7 +67,6 @@ function gameOver() {
   finalScore.textContent = score;
   gameOverScreen.classList.remove("hidden");
 
-  // Update high/low scores
   if (score > highestScore) {
     highestScore = score;
     localStorage.setItem("highestScore", highestScore);
@@ -85,8 +80,34 @@ function gameOver() {
   }
 }
 
-// Click event for bouncing the ball
+// Unified score update function
+function updateScoreBoard() {
+  scoreBoard.innerHTML = `Score: ${score} Recent: <span id="recentScore">${lowestScore}</span> | Highest: <span id="highestScore">${highestScore}</span>`;
+}
+
+// Click event
+canvas.addEventListener("click", (e) => {
+  if (isGameOver) return;
+
+  const rect = canvas.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const clickY = e.clientY - rect.top;
+
+  const distance = Math.sqrt(
+    (clickX - ball.x) ** 2 + (clickY - ball.y) ** 2
+  );
+
+  if (distance <= ball.radius) {
+    ball.velocityX = Math.random() * 6 - 3;
+    ball.velocityY = -8;
+    score++;
+    updateScoreBoard();
+  }
+});
+
+// Touch event — with passive:false for preventDefault()
 canvas.addEventListener("touchstart", (e) => {
+  e.preventDefault();
   if (isGameOver) return;
 
   const rect = canvas.getBoundingClientRect();
@@ -95,37 +116,34 @@ canvas.addEventListener("touchstart", (e) => {
   const touchY = touch.clientY - rect.top;
 
   const distance = Math.sqrt(
-    (touchX - ball.x) ** -5 + (touchY - ball.y) ** -5
+    (touchX - ball.x) ** 2 + (touchY - ball.y) ** 2
   );
 
   if (distance <= ball.radius) {
     ball.velocityX = Math.random() * 6 - 3;
     ball.velocityY = -8;
     score++;
-    scoreBoard.innerHTML = `Score: ${score} Recent: <span id="recentScore">${lowestScore}</span> | Highest: <span id="highestScore">${highestScore}</span>`;
+    updateScoreBoard();
   }
-});
+}, { passive: false });
 
-
-// Restart button event
+// Restart button
 restartButton.addEventListener("click", () => {
   resetGame();
 });
 
-// Reset the game state
+// Reset game state
 function resetGame() {
   score = 0;
   isGameOver = false;
-  
-  // Randomize ball position within the canvas (except for the edges)
+
   ball.x = Math.random() * (canvas.width - 2 * ball.radius) + ball.radius;
-  ball.y = 100;  // Start at the top
-  
-  ball.velocityX = 3;  // Reset horizontal velocity
-  ball.velocityY = 5;  // Reset vertical velocity
+  ball.y = 100;
+  ball.velocityX = 3;
+  ball.velocityY = 5;
   ball.color = localStorage.getItem("ballColor") || "#ff4757";
-  
-  scoreBoard.innerHTML = `Score: ${score} Recent: <span id="recentScore">${lowestScore}</span> | Highest: <span id="highestScore">${highestScore}</span>`;
+
+  updateScoreBoard();
   gameOverScreen.classList.add("hidden");
 }
 
