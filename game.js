@@ -18,8 +18,8 @@ let ball = {
   y: 100,
   radius: 60,
   color: localStorage.getItem("ballColor") || "#ff4757",
-  velocityX: 3,
-  velocityY: 5
+  velocityX: 4,
+  velocityY: 6
 };
 
 let score = 0;
